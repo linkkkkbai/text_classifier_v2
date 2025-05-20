@@ -1,0 +1,4 @@
+output/
+datasets/coco_format
+eval_results/
+*__pycache__*

@@ -1,0 +1,49 @@
+# 模型配置
+model:
+  backbone: "resnet50"
+  pretrained: true
+  roi_size: 7
+  freeze_bn: True
+
+# 数据配置
+data:
+  root_dir: "/data_fast/danielslbai/text_classifier_v2/datasets/coco_format"
+  train_json: "type_balanced_train.json"
+  val_json: "type_balanced_test.json"
+  batch_size: 8
+  num_workers: 8
+  
+# 数据增强
+augmentation:
+  random_crop_prob: 0.5
+  horizontal_flip_prob: 0.3
+  color_jitter:
+    brightness: 0.1
+    contrast: 0.1
+    saturation: 0.1
+    hue: 0.1
+
+# 训练配置
+training:
+  lr: 0.00001
+  weight_decay: 0.00001
+  lr_scheduler: cosine
+  total_iters: 1100
+  validate_interval: 100
+  checkpoint_interval: 100
+  # epochs: 10
+  focal_loss:
+    gamma: 2.0
+    alpha: 0.25
+  
+# 属性配置
+attributes:
+  type:
+    classes: ["可编辑", "不可编辑"]
+    weights: [1.0, 1.0]
+  font:
+    classes: ["常规字体", "加粗字体"]
+    weights: [1.0, 1.0]
+  italic:
+    classes: ["否", "是"]
+    weights: [1.0, 1.0]
